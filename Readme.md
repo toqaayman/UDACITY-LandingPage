@@ -19,7 +19,6 @@ This projecct contains one html file, one javascript file and one css file. I ad
 - [Description](#Description)
 - [Table of contents](#table-of-contents)
 - [Usage](#usage)
-- [Development](#development)
 
 
 # Usage

@@ -1,20 +1,16 @@
-const navigatbar = document.getElementById('navbar__list');
-const secs = document.querySelectorAll('section');
+const navigationbar = document.getElementById('navbar__list');
+const sections = document.querySelectorAll('section');
+
 
 // Building the navbar
-
-const navbarCreate = () => {
-    let navbarr = ''; // Creating a variable for the container
-    secs.forEach(section => {
-        const sectionID = section.id; // section id for every section on the index page
-        const sectionDataNav = section.dataset.nav; // get attribute for every section
-        navbarr += `<li><a href="#${sectionID}" class="menu__link">${sectionDataNav}</a></li>`;
-    });
-    navigatbar.innerHTML = navbarr; // add sections to the navbar
-
-
-};
-navbarCreate();
+function navbarcreatelist() {
+    for (sec of sections) {
+        listitem = document.createElement('li');
+        listitem.innerHTML = `<a href="#${sec.id}" data-nav="${sec.id}" class="menu__link">${sec.dataset.nav}</a>`
+        navigationbar.appendChild(listitem);
+    }
+}
+navbarcreatelist();
 
 // Add class 'active' to section when near top of viewport
 
@@ -33,7 +29,7 @@ const offset = (section) => {
 };
 
 const sectionActivation = () => {
-    secs.forEach(section => {
+    sections.forEach(section => {
         const elementOffset = offset(section);
 
         inviewport = () => elementOffset < 500 && elementOffset >= -500;
@@ -52,8 +48,8 @@ const scrolling = () => {
     const links = document.querySelectorAll('.navbar__menu a');
     links.forEach(link => {
         link.addEventListener('click', () => {
-            for(i = 0 ; i<secs ; i++){
-                secs[i].addEventListener("click",sectionScroll(link));
+            for(i = 0 ; i<sections ; i++){
+                sections[i].addEventListener("click",sectionScroll(link));
             }
         });
     });

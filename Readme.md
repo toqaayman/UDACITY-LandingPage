@@ -10,7 +10,7 @@ Build a multi-section landing page with a dynamically updated navigational menu 
 
 # Description
 
-This projecct contains one html file, one javascript file and one css file. I added a fourth section to the html file. In addition to the js code in the app.js file. I used
+This projecct contains one html file, one javascript file and one css file. I added a fourth section to the html file. In addition to the js code in the app.js file. I used navbarcreatelist function to buikd the navigation bar in the js file. Moreoner I added active and inactive class for the selected sections.
 
 # Table of contents
 

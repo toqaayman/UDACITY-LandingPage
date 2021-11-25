@@ -3,7 +3,7 @@ const sections = document.querySelectorAll('section');
 
 // Build the nav
 
-function createList() {
+function navbarcreatelist() {
     for (section of sections){
         const Listitem = document.createElement('li'); //new <li> element
         Listitem.innerHTML = `<a href="#${section.getAttribute('id')}" class="menu__link"> ${section.getAttribute('data-nav')}</a>`;
@@ -11,7 +11,7 @@ function createList() {
         navigationbar.appendChild(Listitem);
     }
 }
-createList();
+navbarcreatelist();
 
 // Scroll to section on link click
 // Set sections as active

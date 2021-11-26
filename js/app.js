@@ -16,47 +16,48 @@ navbarcreatelist();
 // Scroll to section on link click
 // Set sections as active
 
-function ActiveTheSection(section) {
-	const current = document.querySelector('.active');
-	if (current !== null) {
-		current.classList.remove('active'); //remove active from this section
-	}
-	section.classList.add('active');//add active to another section
+const addActive = (conditional, section) => { // add active class
+    return section.classList.add('your-active-class');
+};
+
+const removeActive = (section) => { //remove active class
+return section.classList.remove('your-active-class');
+};
+
+const offset = (section) => {
+return Math.floor(section.getBoundingClientRect().top);
+};
+
+const sectionActivation = () => {
+sections.forEach(section => {
+    const elementOffset = offset(section);
+    inviewport = () => elementOffset < 500 && elementOffset >= -500;
+    removeActive(section);
+    addActive(inviewport(),section);
+});
+};
+
+document.addEventListener('scroll' ,sectionActivation);
+
+Links =document.querySelectorAll("#navbar__list li");
+
+function scroll(event){ 
+    // takes navigation li (event) as input
+    let sectionId= event.getAttribute("href");
+    let section= document.getElementById(sectionId.substring(1,sectionId.length)); 
+    section.scrollIntoView(
+        {
+            block: "start",
+            behavior: "smooth",
+            inline: "start"
+        });
+    console.log(section);
+    console.log(sectionId);
 }
 
-const scrolling = document.querySelectorAll('.menu__link');
-
-function Activate(sections) {
-	for (let section of sections) {
-		section.addEventListener('click', function() {
-			ActiveTheSection(section); //loop each section to add an event
-		});
-	}
+for(const Link of Links){
+    Link.addEventListener('click',function(e){
+        e.preventDefault();
+        scroll(Link.firstChild);
+    });
 }
-Activate(scrolling);
-
-function ScrollingActive(sections, scrolling) {
-	const offset = {
-        root: document.querySelector('#scroll'),
-        rootMargin: '0px',
-		threshold: 0.4,
-	};
-	
-	for (let i = 0; i < sections.length; i++) {
-	const element = new IntersectionObserver(
-        function(conditions) {
-            for(let condition of conditions) {
-                if(condition.isIntersecting) {
-                    scrolling[i].classList.add('active');
-                    sections[i].classList.add('your-active-class');
-                } else {
-                    scrolling[i].classList.remove('active');
-                    sections[i].className = ' ';
-                }
-            }
-	}, offset);
-    //Add class 'active' to the section near the top and remove the old 'active' class section
-	element.observe(sections[i]);
-	}
-}
-ScrollingActive(sections, scrolling);

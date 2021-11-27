@@ -16,28 +16,26 @@ navbarcreatelist();
 // Scroll to section on link click
 // Set sections as active
 
-const addActive = (conditional, section) => { // add active class
-    return section.classList.add('your-active-class');
-};
+function active(section){
+    const rectDOM = section.getBoundingClientRect();
+    const vertInView = (rectDOM.top <= (window.innerHeight || document.documentElement.clientHeight)) && ((rectDOM.top + rectDOM.height) >= 0);
+    const horInView = (rectDOM.left <= (window.innerWidth || document.documentElement.clientWidth)) && ((rectDOM.left + rectDOM.width) >= 0);
 
-const removeActive = (section) => { //remove active class
-return section.classList.remove('your-active-class');
-};
+    return (vertInView && horInView);
+}
 
-const offset = (section) => {
-return Math.floor(section.getBoundingClientRect().top);
-};
+  // Add class 'active' to section when near top of viewport
+  function decideifactive(){
+    for (const section of sections){
+      if (active(section)=== true){
+        section.classList.add('your-active-class');
+      } else {
+        section.classList.remove('your-active-class');
+      }
+    }
+}
 
-const sectionActivation = () => {
-sections.forEach(section => {
-    const elementOffset = offset(section);
-    inviewport = () => elementOffset < 500 && elementOffset >= -500;
-    removeActive(section);
-    addActive(inviewport(),section);
-});
-};
-
-document.addEventListener('scroll' ,sectionActivation);
+window.addEventListener('scroll',decideifactive);
 
 Links =document.querySelectorAll("#navbar__list li");
 
